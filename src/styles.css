@@ -4,6 +4,30 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --font-sans:
+    "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-sg-red: oklch(0.68 0.2 30);
+  --color-sg-ink: oklch(0.16 0.005 250);
+  --color-sg-muted: oklch(0.55 0.005 250);
+  --color-sg-line: oklch(0.92 0.002 250);
+  --color-sg-chip: oklch(0.965 0.002 250);
+  --color-sg-green: oklch(0.5 0.14 145);
+  --color-sg-green-badge: oklch(0.45 0.13 140);
+  --color-sg-blue: oklch(0.55 0.2 258);
+  --color-sg-link: oklch(0.52 0.22 262);
+  --color-sg-error: oklch(0.53 0.21 27);
+  --color-sg-map: oklch(0.9 0.002 250);
+  --color-sg-map-bg: oklch(0.975 0.002 250);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /*
  * Design system definition.
  *
