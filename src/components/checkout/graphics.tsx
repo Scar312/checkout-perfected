@@ -28,10 +28,10 @@ export function ArenaOverview({ className = "" }: { className?: string }) {
       <g stroke="#fff" strokeWidth="2.4">
         {Array.from({ length: 28 }).map((_, i) => {
           const a = (i / 28) * Math.PI * 2;
-          const x1 = 120 + Math.cos(a) * 57;
-          const y1 = 100 + Math.sin(a) * 41;
-          const x2 = 120 + Math.cos(a) * 112;
-          const y2 = 100 + Math.sin(a) * 92;
+          const x1 = Math.round((120 + Math.cos(a) * 57) * 100) / 100;
+          const y1 = Math.round((100 + Math.sin(a) * 41) * 100) / 100;
+          const x2 = Math.round((120 + Math.cos(a) * 112) * 100) / 100;
+          const y2 = Math.round((100 + Math.sin(a) * 92) * 100) / 100;
           return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} />;
         })}
       </g>

@@ -173,7 +173,7 @@ function CheckoutPage() {
                   State Farm Arena, Atlanta, GA
                 </p>
               </div>
-              <button className="flex h-[54px] shrink-0 items-center gap-2 rounded-[12px] bg-sg-chip px-4 transition-colors active:bg-sg-line">
+              <button className="flex h-[54px] shrink-0 items-center gap-2 rounded-[12px] bg-sg-chip px-4 transition-colors hover:bg-sg-line active:bg-sg-line">
                 <TicketIcon className="h-[18px] w-6 text-sg-ink" />
                 <span className="text-[19px] font-medium">1</span>
                 <Chevron className="h-3.5 w-3.5 text-sg-ink" />
@@ -220,7 +220,7 @@ function CheckoutPage() {
 
           {/* Payment */}
           <div className="mt-7 flex items-center justify-between gap-3">
-            <p className="text-[19px] font-semibold">Payment method</p>
+            <p className="shrink-0 text-[19px] font-semibold">Payment method</p>
             <PayBrands />
           </div>
           <div className="mt-3 flex items-center justify-between gap-3 rounded-[14px] border border-sg-line px-4 py-3.5">
