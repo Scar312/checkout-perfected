@@ -145,11 +145,11 @@ function CheckoutPage() {
 
         {/* Collapsible details */}
         <div
-          className={`grid overflow-hidden border-t border-sg-line transition-[grid-template-rows,opacity] duration-300 ease-out ${
+          className={`grid grid-cols-[100%] overflow-hidden border-t border-sg-line transition-[grid-template-rows,opacity] duration-300 ease-out ${
             detailsOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
           }`}
         >
-          <div className="min-h-0">
+          <div className="min-h-0 min-w-0">
             <div className="no-scrollbar flex snap-x snap-mandatory gap-3.5 overflow-x-auto px-5 py-6">
               <img
                 src={seatViewAsset.url}
