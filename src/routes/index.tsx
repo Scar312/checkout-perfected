@@ -168,7 +168,7 @@ function CheckoutPage() {
                   src={image.src}
                   alt={image.alt}
                   loading="lazy"
-                  className="h-[180px] w-[256px] shrink-0 snap-center rounded-[14px] bg-sg-map-bg object-cover"
+                  className="h-[164px] w-[232px] shrink-0 snap-center rounded-[14px] bg-sg-map-bg object-cover"
                 />
               ))}
             </div>
