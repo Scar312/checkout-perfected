@@ -305,15 +305,11 @@ function CheckoutPage() {
               <dl className="mt-2 space-y-1 text-[14px]">
                 <div className="flex items-center justify-between gap-3">
                   <dt>Tickets</dt>
-                  <dd>${money(TICKET_PRICE)} x 1</dd>
+                  <dd>${money(TICKET_PRICE)} x {QUANTITY}</dd>
                 </div>
                 <div className="flex items-center justify-between gap-3">
                   <dt>Fees</dt>
-                  <dd>${money(FEES)} x 1</dd>
-                </div>
-                <div className="flex items-center justify-between gap-3">
-                  <dt>Tax</dt>
-                  <dd>${money(TAX)}</dd>
+                  <dd>${money(FEES)} x {QUANTITY}</dd>
                 </div>
                 {applied && (
                   <div className="flex items-center justify-between gap-3 text-sg-green">
@@ -377,7 +373,6 @@ function CheckoutPage() {
                       </label>
                       <input
                         id="promo"
-                        autoFocus
                         value={code}
                         maxLength={40}
                         onChange={(e) => {
