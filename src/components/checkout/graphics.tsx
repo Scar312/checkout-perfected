@@ -4,7 +4,7 @@ import shieldAsset from "@/assets/shield.png.asset.json";
 import amexAsset from "@/assets/amex.png.asset.json";
 import discoverAsset from "@/assets/discover.png.asset.json";
 import affirmAsset from "@/assets/affirm.png.asset.json";
-import ticketChipAsset from "@/assets/ticket-chip.png.asset.json";
+import ticketIconAsset from "@/assets/ticket-icon.png.asset.json";
 
 export function SeatGeekLogo({ className = "" }: { className?: string }) {
   return (
@@ -16,13 +16,26 @@ export function SeatGeekLogo({ className = "" }: { className?: string }) {
   );
 }
 
-export function TicketChip({ className = "" }: { className?: string }) {
+export function TicketChip({
+  count = 2,
+  className = "",
+}: {
+  count?: number;
+  className?: string;
+}) {
   return (
-    <img
-      src={ticketChipAsset.url}
-      alt="1 ticket"
-      className={`h-[44px] w-auto shrink-0 object-contain ${className}`}
-    />
+    <span
+      className={`inline-flex h-[42px] shrink-0 items-center gap-2 rounded-[10px] bg-sg-chip px-3 ${className}`}
+    >
+      <img
+        src={ticketIconAsset.url}
+        alt=""
+        aria-hidden="true"
+        className="h-[17px] w-auto object-contain"
+      />
+      <span className="text-[15px] font-semibold">{count}</span>
+      <Chevron className="h-[11px] w-[11px] text-sg-blue" />
+    </span>
   );
 }
 
@@ -46,12 +59,13 @@ export function AppleLogo({ className = "" }: { className?: string }) {
 }
 
 export function PayBrands({ className = "" }: { className?: string }) {
-  const box = "flex h-[20px] items-center justify-center rounded-[4px] px-1.5";
-  const img = "h-[20px] w-auto shrink-0 object-contain";
+  const box =
+    "flex h-[17px] w-[26px] shrink-0 items-center justify-center overflow-hidden rounded-[3px]";
+  const img = "h-full w-full object-contain";
   return (
-    <div className={`flex items-center gap-1 ${className}`}>
+    <div className={`flex items-center gap-[6px] ${className}`}>
       <div className={`${box} border border-sg-line bg-white`}>
-        <svg viewBox="0 0 24 28" className="h-[13px]" aria-label="PayPal">
+        <svg viewBox="0 0 24 28" className="h-[11px]" aria-label="PayPal">
           <path
             d="M6 27 9.6 4h7.2c4 0 6.4 2.1 5.8 5.9-.7 4.4-4 6.5-8.4 6.5h-2.5L10.5 27H6Z"
             fill="oklch(0.45 0.16 265)"
@@ -62,22 +76,28 @@ export function PayBrands({ className = "" }: { className?: string }) {
           />
         </svg>
       </div>
-      <div className={`${box} gap-[2px] border border-sg-line bg-white`}>
-        <AppleLogo className="h-[10px] text-sg-ink" />
-        <span className="text-[9px] font-medium text-sg-ink">Pay</span>
+      <div className={`${box} gap-[1px] border border-sg-line bg-white`}>
+        <AppleLogo className="h-[8px] text-sg-ink" />
+        <span className="text-[7.5px] font-medium text-sg-ink">Pay</span>
       </div>
       <div className={`${box} bg-sg-ink`}>
         <span className="flex">
-          <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.62_0.21_35)]" />
-          <span className="-ml-1 h-2.5 w-2.5 rounded-full bg-[oklch(0.78_0.17_80)]" />
+          <span className="h-[9px] w-[9px] rounded-full bg-[oklch(0.62_0.21_35)]" />
+          <span className="-ml-[4px] h-[9px] w-[9px] rounded-full bg-[oklch(0.78_0.17_80)]" />
         </span>
       </div>
       <div className={`${box} bg-[oklch(0.42_0.19_265)]`}>
-        <span className="text-[9px] font-bold italic text-white">VISA</span>
+        <span className="text-[7.5px] font-bold italic text-white">VISA</span>
       </div>
-      <img src={amexAsset.url} alt="American Express" className={img} />
-      <img src={discoverAsset.url} alt="Discover" className={img} />
-      <img src={affirmAsset.url} alt="Affirm" className={img} />
+      <div className={box}>
+        <img src={amexAsset.url} alt="American Express" className={img} />
+      </div>
+      <div className={box}>
+        <img src={discoverAsset.url} alt="Discover" className={img} />
+      </div>
+      <div className={box}>
+        <img src={affirmAsset.url} alt="Affirm" className={img} />
+      </div>
     </div>
   );
 }

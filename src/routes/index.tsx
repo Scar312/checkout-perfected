@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import seatViewAsset from "@/assets/seatview2.png.asset.json";
-import mapOverviewAsset from "@/assets/map-overview.png.asset.json";
-import mapZoomAsset from "@/assets/map-zoom.png.asset.json";
+import { useEffect, useState } from "react";
+import dealBadgeAsset from "@/assets/deal-8.png.asset.json";
+import seatViewAsset from "@/assets/stage-view.png.asset.json";
+import mapOverviewAsset from "@/assets/map-overview2.png.asset.json";
+import mapZoomAsset from "@/assets/map-zoom2.png.asset.json";
 import {
   AppleLogo,
   Chevron,
@@ -20,7 +21,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Review your tickets for Olivia Dean with Baby Rose at State Farm Arena and pay securely.",
+          "Review your tickets for BTS at Soldier Field, Chicago and pay securely.",
       },
       { property: "og:title", content: "Checkout — Review your order" },
       {
@@ -32,11 +33,12 @@ export const Route = createFileRoute("/")({
   component: CheckoutPage,
 });
 
-const TICKET_PRICE = 405.0;
-const FEES = 67.75;
-const TAX = 42.07;
+const TICKET_PRICE = 254.0;
+const FEES = 42.64;
+const QUANTITY = 2;
+const SUBTOTAL = (TICKET_PRICE + FEES) * QUANTITY;
 const PROMO_CODES = ["dreaming80", "messy80", "seat80tix", "purple80"];
-const DISCOUNT = 411.85;
+const DISCOUNT = Math.round(SUBTOTAL * 0.8 * 100) / 100;
 
 const money = (n: number) =>
   n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -44,9 +46,11 @@ const money = (n: number) =>
 function DealBadge() {
   return (
     <div className="flex items-center gap-2">
-      <span className="flex h-[19px] w-[19px] items-center justify-center rounded-[5px] bg-sg-green-badge text-[11px] font-semibold text-white">
-        8
-      </span>
+      <img
+        src={dealBadgeAsset.url}
+        alt="Deal score 8"
+        className="h-[19px] w-auto shrink-0 self-center object-contain"
+      />
       <span className="text-[14px] font-semibold text-sg-green">Great Deal</span>
     </div>
   );
@@ -79,7 +83,7 @@ function CheckoutPage() {
   const [paying, setPaying] = useState(false);
 
   const discount = applied ? DISCOUNT : 0;
-  const total = TICKET_PRICE + FEES + TAX - discount;
+  const total = SUBTOTAL - discount;
 
   const applyCode = () => {
     const value = code.trim();
@@ -108,6 +112,15 @@ function CheckoutPage() {
     window.setTimeout(() => setPaying(false), 1800);
   };
 
+  useEffect(() => {
+    if (!breakdownOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [breakdownOpen]);
+
   return (
     <div className="min-h-screen bg-white font-sans text-[15px] leading-[1.45] text-sg-ink antialiased">
       <div className="mx-auto flex min-h-screen w-full max-w-[430px] flex-col pb-[128px]">
@@ -125,9 +138,9 @@ function CheckoutPage() {
             Review your order
           </h2>
           <p className="mt-3.5 text-[16px] font-semibold leading-[1.35]">
-            Olivia Dean with Baby Rose
+            BTS
           </p>
-          <p className="mt-1 text-[14px] text-sg-muted">Sat, Aug 22 at 8:00pm</p>
+          <p className="mt-1 text-[14px] text-sg-muted">Thu, Aug 27 at 8:00pm</p>
           <div className="mt-2.5 flex items-center justify-between gap-3 pb-3.5">
             <DealBadge />
             <DetailsToggle open={detailsOpen} onClick={() => setDetailsOpen((v) => !v)} />
@@ -145,33 +158,33 @@ function CheckoutPage() {
               {[
                 {
                   src: seatViewAsset.url,
-                  alt: "View of the stage from Section 226, Row E",
+                  alt: "View of the stage from Section 445, Row 24",
                 },
-                { src: mapOverviewAsset.url, alt: "State Farm Arena seating map" },
-                { src: mapZoomAsset.url, alt: "Zoomed map of Section 226, Row E" },
+                { src: mapOverviewAsset.url, alt: "Soldier Field seating map" },
+                { src: mapZoomAsset.url, alt: "Zoomed map of Section 445, Row 24" },
               ].map((image) => (
                 <img
                   key={image.src}
                   src={image.src}
                   alt={image.alt}
                   loading="lazy"
-                  className="h-[148px] w-[214px] shrink-0 snap-center rounded-[12px] bg-sg-map-bg object-cover"
+                  className="h-[180px] w-[256px] shrink-0 snap-center rounded-[14px] bg-sg-map-bg object-cover"
                 />
               ))}
             </div>
 
             <div className="flex items-center justify-between gap-3 px-4 pb-5">
               <div className="min-w-0">
-                <p className="text-[15px] font-medium leading-[1.4]">Section 226, Row E</p>
+                <p className="text-[15px] font-medium leading-[1.4]">Section 445, Row 24</p>
                 <p className="mt-1 text-[14px] leading-[1.4] text-sg-muted">
-                  State Farm Arena, Atlanta, GA
+                  Soldier Field, Chicago, IL
                 </p>
               </div>
               <button
-                aria-label="1 ticket"
+                aria-label="2 tickets"
                 className="shrink-0 transition-transform active:scale-95"
               >
-                <TicketChip />
+                <TicketChip count={QUANTITY} />
               </button>
             </div>
           </div>
@@ -184,7 +197,7 @@ function CheckoutPage() {
             <div className="min-w-0">
               <p className="text-[15px] font-semibold leading-[1.4]">Mobile tickets</p>
               <p className="mt-1 text-[14px] leading-[1.45] text-sg-ink">
-                Tickets will be delivered to your email address by Aug 21.
+                Tickets will be delivered to your email address by Aug 26.
               </p>
             </div>
           </div>
@@ -206,7 +219,7 @@ function CheckoutPage() {
           <div className="mt-2.5 flex items-center justify-between gap-3 rounded-[12px] border border-sg-line px-3.5 py-2.5">
             <div className="min-w-0">
               <p className="truncate text-[14px]">sarahjohnsonxx22@gmail.com</p>
-              <p className="mt-0.5 text-[14px] text-sg-muted">(713) 441-5452</p>
+              <p className="mt-0.5 text-[14px] text-sg-muted">(351) 333-1408</p>
             </div>
             <button className="shrink-0 rounded-full bg-sg-chip px-4 py-2 text-[13px] font-semibold transition-colors active:bg-sg-line">
               Edit
@@ -292,15 +305,11 @@ function CheckoutPage() {
               <dl className="mt-2 space-y-1 text-[14px]">
                 <div className="flex items-center justify-between gap-3">
                   <dt>Tickets</dt>
-                  <dd>${money(TICKET_PRICE)} x 1</dd>
+                  <dd>${money(TICKET_PRICE)} x {QUANTITY}</dd>
                 </div>
                 <div className="flex items-center justify-between gap-3">
                   <dt>Fees</dt>
-                  <dd>${money(FEES)} x 1</dd>
-                </div>
-                <div className="flex items-center justify-between gap-3">
-                  <dt>Tax</dt>
-                  <dd>${money(TAX)}</dd>
+                  <dd>${money(FEES)} x {QUANTITY}</dd>
                 </div>
                 {applied && (
                   <div className="flex items-center justify-between gap-3 text-sg-green">
@@ -364,7 +373,6 @@ function CheckoutPage() {
                       </label>
                       <input
                         id="promo"
-                        autoFocus
                         value={code}
                         maxLength={40}
                         onChange={(e) => {
