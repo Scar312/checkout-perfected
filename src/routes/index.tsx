@@ -418,7 +418,7 @@ function CheckoutPage() {
         <button
           onClick={pay}
           disabled={paying}
-          className="mt-3 flex h-[52px] w-full items-center justify-center gap-1 rounded-[10px] bg-sg-ink text-white transition-transform active:scale-[0.99] disabled:opacity-90"
+          className="mt-3 flex h-[52px] w-full items-center justify-center gap-1 rounded-[10px] bg-black text-white transition-transform active:scale-[0.99] disabled:opacity-90"
         >
           {paying ? (
             <span className="h-5 w-5 animate-spin rounded-full border-[3px] border-white/30 border-t-white" />
