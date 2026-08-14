@@ -284,6 +284,15 @@ function CheckoutPage() {
         </div>
       </div>
 
+      {/* Backdrop for the Total breakdown */}
+      {breakdownOpen && (
+        <button
+          aria-label="Close breakdown"
+          onClick={() => setBreakdownOpen(false)}
+          className="fixed inset-0 z-30 bg-black/40 backdrop-blur-[3px]"
+        />
+      )}
+
       {/* Sticky footer */}
       <div className="fixed bottom-0 left-1/2 z-40 w-full max-w-[430px] -translate-x-1/2 border-t border-sg-line bg-white px-4 pb-4 pt-3">
         <div className="flex items-center justify-between gap-3">
