@@ -168,7 +168,7 @@ function CheckoutPage() {
                   src={image.src}
                   alt={image.alt}
                   loading="lazy"
-                  className="h-[180px] w-[256px] shrink-0 snap-center rounded-[14px] bg-sg-map-bg object-cover"
+                  className="h-[164px] w-[232px] shrink-0 snap-center rounded-[14px] bg-sg-map-bg object-cover"
                 />
               ))}
             </div>
@@ -283,6 +283,15 @@ function CheckoutPage() {
           </div>
         </div>
       </div>
+
+      {/* Backdrop for the Total breakdown */}
+      {breakdownOpen && (
+        <button
+          aria-label="Close breakdown"
+          onClick={() => setBreakdownOpen(false)}
+          className="fixed inset-0 z-30 bg-black/40 backdrop-blur-[3px]"
+        />
+      )}
 
       {/* Sticky footer */}
       <div className="fixed bottom-0 left-1/2 z-40 w-full max-w-[430px] -translate-x-1/2 border-t border-sg-line bg-white px-4 pb-4 pt-3">
@@ -418,7 +427,7 @@ function CheckoutPage() {
         <button
           onClick={pay}
           disabled={paying}
-          className="mt-3 flex h-[52px] w-full items-center justify-center gap-1 rounded-[10px] bg-sg-ink text-white transition-transform active:scale-[0.99] disabled:opacity-90"
+          className="mt-3 flex h-[52px] w-full items-center justify-center gap-1 rounded-[10px] bg-black text-white transition-transform active:scale-[0.99] disabled:opacity-90"
         >
           {paying ? (
             <span className="h-5 w-5 animate-spin rounded-full border-[3px] border-white/30 border-t-white" />
