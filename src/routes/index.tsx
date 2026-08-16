@@ -385,7 +385,7 @@ function CheckoutPage() {
                         value={code}
                         maxLength={40}
                         onChange={(e) => {
-                          setCode(e.target.value);
+                          setCode(e.target.value.toUpperCase());
                           if (error) setError(null);
                         }}
                         onKeyDown={(e) => e.key === "Enter" && applyCode()}
