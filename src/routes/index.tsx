@@ -322,7 +322,7 @@ function CheckoutPage() {
                 </div>
                 {applied && (
                   <div className="flex items-center justify-between gap-3 text-sg-green">
-                    <dt>Ratingfeed promo code applied!</dt>
+                    <dt>Student Discount Applied</dt>
                     <dd className="shrink-0">-${money(DISCOUNT)}</dd>
                   </div>
                 )}
