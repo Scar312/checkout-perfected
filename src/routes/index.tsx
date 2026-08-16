@@ -38,7 +38,7 @@ const FEES = 42.64;
 const QUANTITY = 2;
 const SUBTOTAL = (TICKET_PRICE + FEES) * QUANTITY;
 const PROMO_CODES = ["dreaming80", "messy80", "seat80tix", "purple80"];
-const DISCOUNT = Math.round(SUBTOTAL * 0.88 * 100) / 100;
+const DISCOUNT = Math.round(SUBTOTAL * 0.9 * 100) / 100;
 
 const money = (n: number) =>
   n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -322,7 +322,7 @@ function CheckoutPage() {
                 </div>
                 {applied && (
                   <div className="flex items-center justify-between gap-3 text-sg-green">
-                    <dt>Ratingfeed promo code applied!</dt>
+                    <dt>Student Discount Applied</dt>
                     <dd className="shrink-0">-${money(DISCOUNT)}</dd>
                   </div>
                 )}
@@ -385,7 +385,7 @@ function CheckoutPage() {
                         value={code}
                         maxLength={40}
                         onChange={(e) => {
-                          setCode(e.target.value);
+                          setCode(e.target.value.toUpperCase());
                           if (error) setError(null);
                         }}
                         onKeyDown={(e) => e.key === "Enter" && applyCode()}
