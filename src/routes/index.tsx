@@ -38,7 +38,7 @@ const FEES = 42.64;
 const QUANTITY = 2;
 const SUBTOTAL = (TICKET_PRICE + FEES) * QUANTITY;
 const PROMO_CODES = ["dreaming80", "messy80", "seat80tix", "purple80"];
-const DISCOUNT = Math.round(SUBTOTAL * 0.8 * 100) / 100;
+const DISCOUNT = Math.round(SUBTOTAL * 0.88 * 100) / 100;
 
 const money = (n: number) =>
   n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -193,7 +193,7 @@ function CheckoutPage() {
         {/* Delivery + protection */}
         <div className="space-y-4 border-t border-sg-line px-4 py-5">
           <div className="flex gap-3">
-            <QrIcon className="mt-0.5 h-[18px] w-[18px] shrink-0" />
+              <QrIcon className="mt-0.5 h-[26px] w-[26px] shrink-0" />
             <div className="min-w-0">
               <p className="text-[15px] font-semibold leading-[1.4]">Mobile tickets</p>
               <p className="mt-1 text-[14px] leading-[1.45] text-sg-ink">
@@ -202,7 +202,7 @@ function CheckoutPage() {
             </div>
           </div>
           <div className="flex gap-3">
-            <ShieldCheck className="mt-0.5 h-[19px] w-[18px] shrink-0" />
+            <ShieldCheck className="mt-0.5 h-[27px] w-[26px] shrink-0" />
             <div className="min-w-0">
               <p className="text-[15px] font-semibold leading-[1.4]">Every ticket protected</p>
               <p className="mt-1 text-[14px] leading-[1.45] text-sg-ink">
@@ -289,7 +289,7 @@ function CheckoutPage() {
         <button
           aria-label="Close breakdown"
           onClick={() => setBreakdownOpen(false)}
-          className="fixed inset-0 z-30 bg-black/40 backdrop-blur-[3px]"
+          className="fixed inset-0 z-30 bg-black/50"
         />
       )}
 

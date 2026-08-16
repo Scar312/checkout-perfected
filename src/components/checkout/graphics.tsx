@@ -60,12 +60,12 @@ export function AppleLogo({ className = "" }: { className?: string }) {
 
 export function PayBrands({ className = "" }: { className?: string }) {
   const box =
-    "flex h-[17px] w-[26px] shrink-0 items-center justify-center overflow-hidden rounded-[3px]";
+    "flex h-[14px] w-[21px] shrink-0 items-center justify-center overflow-hidden rounded-[3px]";
   const img = "h-full w-full object-contain";
   return (
-    <div className={`flex items-center gap-[6px] ${className}`}>
+    <div className={`flex items-center gap-[9px] ${className}`}>
       <div className={`${box} border border-sg-line bg-white`}>
-        <svg viewBox="0 0 24 28" className="h-[11px]" aria-label="PayPal">
+        <svg viewBox="0 0 24 28" className="h-[9px]" aria-label="PayPal">
           <path
             d="M6 27 9.6 4h7.2c4 0 6.4 2.1 5.8 5.9-.7 4.4-4 6.5-8.4 6.5h-2.5L10.5 27H6Z"
             fill="oklch(0.45 0.16 265)"
@@ -77,17 +77,17 @@ export function PayBrands({ className = "" }: { className?: string }) {
         </svg>
       </div>
       <div className={`${box} gap-[1px] border border-sg-line bg-white`}>
-        <AppleLogo className="h-[8px] text-sg-ink" />
-        <span className="text-[7.5px] font-medium text-sg-ink">Pay</span>
+        <AppleLogo className="h-[7px] text-sg-ink" />
+        <span className="text-[6.5px] font-medium text-sg-ink">Pay</span>
       </div>
       <div className={`${box} bg-sg-ink`}>
         <span className="flex">
-          <span className="h-[9px] w-[9px] rounded-full bg-[oklch(0.62_0.21_35)]" />
-          <span className="-ml-[4px] h-[9px] w-[9px] rounded-full bg-[oklch(0.78_0.17_80)]" />
+          <span className="h-[7.5px] w-[7.5px] rounded-full bg-[oklch(0.62_0.21_35)]" />
+          <span className="-ml-[3px] h-[7.5px] w-[7.5px] rounded-full bg-[oklch(0.78_0.17_80)]" />
         </span>
       </div>
       <div className={`${box} bg-[oklch(0.42_0.19_265)]`}>
-        <span className="text-[7.5px] font-bold italic text-white">VISA</span>
+        <span className="text-[6.5px] font-bold italic text-white">VISA</span>
       </div>
       <div className={box}>
         <img src={amexAsset.url} alt="American Express" className={img} />
