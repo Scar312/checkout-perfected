@@ -1,9 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import dealBadgeAsset from "@/assets/deal-8.png.asset.json";
-import seatViewAsset from "@/assets/stage-view.png.asset.json";
-import mapOverviewAsset from "@/assets/map-overview2.png.asset.json";
-import mapZoomAsset from "@/assets/map-zoom2.png.asset.json";
+import arenaOverviewAsset from "@/assets/arena-overview.png.asset.json";
+import arenaZoomAsset from "@/assets/arena-zoom.png.asset.json";
 import {
   AppleLogo,
   Chevron,
@@ -21,7 +19,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Review your tickets for BTS at Soldier Field, Chicago and pay securely.",
+          "Review your tickets for J. Cole at Toyota Center, Houston and pay securely.",
       },
       { property: "og:title", content: "Checkout — Review your order" },
       {
@@ -33,8 +31,8 @@ export const Route = createFileRoute("/")({
   component: CheckoutPage,
 });
 
-const TICKET_PRICE = 254.0;
-const FEES = 42.64;
+const TICKET_PRICE = 45.0;
+const FEES = 9.65;
 const QUANTITY = 2;
 const SUBTOTAL = (TICKET_PRICE + FEES) * QUANTITY;
 const PROMO_CODES = ["dreaming80", "messy80", "seat80tix", "purple80"];
@@ -46,12 +44,10 @@ const money = (n: number) =>
 function DealBadge() {
   return (
     <div className="flex items-center gap-2">
-      <img
-        src={dealBadgeAsset.url}
-        alt="Deal score 8"
-        className="h-[19px] w-auto shrink-0 self-center object-contain"
-      />
-      <span className="text-[14px] font-semibold text-sg-green">Great Deal</span>
+      <span className="flex h-[19px] shrink-0 items-center rounded-[5px] bg-sg-green px-1.5 text-[12px] font-bold text-white">
+        10
+      </span>
+      <span className="text-[14px] font-semibold text-sg-green">Amazing Deal</span>
     </div>
   );
 }
