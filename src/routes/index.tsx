@@ -38,7 +38,7 @@ const SUBTOTAL = (TICKET_PRICE + FEES) * QUANTITY;
 const BASE_DISCOUNT = 10.54;
 const BASE_TOTAL = SUBTOTAL - BASE_DISCOUNT;
 const PROMO_CODES = ["dreaming80", "messy80", "seat80tix", "purple80"];
-const DISCOUNT = Math.round(BASE_TOTAL * 0.9 * 100) / 100;
+const DISCOUNT = Math.round(BASE_TOTAL * 0.8 * 100) / 100;
 
 const money = (n: number) =>
   n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
