@@ -296,7 +296,11 @@ function CheckoutPage() {
       {/* Sticky footer */}
       <div className="fixed bottom-0 left-1/2 z-40 w-full max-w-[430px] -translate-x-1/2 border-t border-sg-line bg-white px-4 pb-4 pt-3">
         <div className="flex items-center justify-between gap-3">
-          <p className="text-[15px] font-semibold">Total ${money(total)}</p>
+          <p className="flex items-center gap-2 text-[15px] font-semibold">
+            <span>Total</span>
+            <span className="font-normal text-sg-muted line-through">${money(SUBTOTAL)}</span>
+            <span className="text-sg-green">${money(total)}</span>
+          </p>
           <DetailsToggle open={breakdownOpen} onClick={() => setBreakdownOpen((v) => !v)} />
         </div>
 
@@ -319,6 +323,10 @@ function CheckoutPage() {
                 <div className="flex items-center justify-between gap-3">
                   <dt>Fees</dt>
                   <dd>${money(FEES)} x {QUANTITY}</dd>
+                </div>
+                <div className="flex items-center justify-between gap-3">
+                  <dt>Discount</dt>
+                  <dd className="shrink-0 text-sg-green">-${money(BASE_DISCOUNT)}</dd>
                 </div>
                 {applied && (
                   <div className="flex items-center justify-between gap-3 text-sg-green">
