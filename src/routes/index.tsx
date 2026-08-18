@@ -1,9 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import dealBadgeAsset from "@/assets/deal-8.png.asset.json";
-import seatViewAsset from "@/assets/stage-view.png.asset.json";
-import mapOverviewAsset from "@/assets/map-overview2.png.asset.json";
-import mapZoomAsset from "@/assets/map-zoom2.png.asset.json";
+import arenaOverviewAsset from "@/assets/arena-overview.png.asset.json";
+import arenaZoomAsset from "@/assets/arena-zoom.png.asset.json";
 import {
   AppleLogo,
   Chevron,
@@ -21,7 +19,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Review your tickets for BTS at Soldier Field, Chicago and pay securely.",
+          "Review your tickets for J. Cole at Toyota Center, Houston and pay securely.",
       },
       { property: "og:title", content: "Checkout — Review your order" },
       {
@@ -33,12 +31,14 @@ export const Route = createFileRoute("/")({
   component: CheckoutPage,
 });
 
-const TICKET_PRICE = 254.0;
-const FEES = 42.64;
+const TICKET_PRICE = 45.0;
+const FEES = 9.65;
 const QUANTITY = 2;
 const SUBTOTAL = (TICKET_PRICE + FEES) * QUANTITY;
+const BASE_DISCOUNT = 10.54;
+const BASE_TOTAL = SUBTOTAL - BASE_DISCOUNT;
 const PROMO_CODES = ["dreaming80", "messy80", "seat80tix", "purple80"];
-const DISCOUNT = Math.round(SUBTOTAL * 0.9 * 100) / 100;
+const DISCOUNT = Math.round(BASE_TOTAL * 0.9 * 100) / 100;
 
 const money = (n: number) =>
   n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -46,12 +46,10 @@ const money = (n: number) =>
 function DealBadge() {
   return (
     <div className="flex items-center gap-2">
-      <img
-        src={dealBadgeAsset.url}
-        alt="Deal score 8"
-        className="h-[19px] w-auto shrink-0 self-center object-contain"
-      />
-      <span className="text-[14px] font-semibold text-sg-green">Great Deal</span>
+      <span className="flex h-[19px] shrink-0 items-center rounded-[5px] bg-sg-green px-1.5 text-[12px] font-bold text-white">
+        10
+      </span>
+      <span className="text-[14px] font-semibold text-sg-green">Amazing Deal</span>
     </div>
   );
 }
@@ -83,7 +81,7 @@ function CheckoutPage() {
   const [paying, setPaying] = useState(false);
 
   const discount = applied ? DISCOUNT : 0;
-  const total = SUBTOTAL - discount;
+  const total = BASE_TOTAL - discount;
 
   const applyCode = () => {
     const value = code.trim();
@@ -127,7 +125,9 @@ function CheckoutPage() {
         {/* Header */}
         <header className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-4 pb-2 pt-4">
           <SeatGeekLogo />
-          <h1 className="truncate text-[16px] font-semibold">Checkout</h1>
+          <h1 className="truncate text-[16px] font-semibold">
+            Checkout <span className="text-sg-muted">· 2 of 2</span>
+          </h1>
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-sg-line bg-white text-[14px] font-semibold shadow-[0_1px_3px_rgba(17,24,39,0.08)]">
             S
           </span>
@@ -137,10 +137,8 @@ function CheckoutPage() {
           <h2 className="text-[24px] font-bold leading-[1.2] tracking-[-0.02em]">
             Review your order
           </h2>
-          <p className="mt-3.5 text-[16px] font-semibold leading-[1.35]">
-            BTS
-          </p>
-          <p className="mt-1 text-[14px] text-sg-muted">Thu, Aug 27 at 8:00pm</p>
+          <p className="mt-3.5 text-[16px] font-semibold leading-[1.35]">J. Cole</p>
+          <p className="mt-1 text-[14px] text-sg-muted">Thu, Sep 17 at 8:00pm</p>
           <div className="mt-2.5 flex items-center justify-between gap-3 pb-3.5">
             <DealBadge />
             <DetailsToggle open={detailsOpen} onClick={() => setDetailsOpen((v) => !v)} />
@@ -157,11 +155,13 @@ function CheckoutPage() {
             <div className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 py-4">
               {[
                 {
-                  src: seatViewAsset.url,
-                  alt: "View of the stage from Section 445, Row 24",
+                  src: arenaOverviewAsset.url,
+                  alt: "Toyota Center seating map with Section 411 highlighted",
                 },
-                { src: mapOverviewAsset.url, alt: "Soldier Field seating map" },
-                { src: mapZoomAsset.url, alt: "Zoomed map of Section 445, Row 24" },
+                {
+                  src: arenaZoomAsset.url,
+                  alt: "Zoomed map of Section 411, Row 8",
+                },
               ].map((image) => (
                 <img
                   key={image.src}
@@ -175,9 +175,9 @@ function CheckoutPage() {
 
             <div className="flex items-center justify-between gap-3 px-4 pb-5">
               <div className="min-w-0">
-                <p className="text-[15px] font-medium leading-[1.4]">Section 445, Row 24</p>
+                <p className="text-[15px] font-medium leading-[1.4]">Section 411, Row 8</p>
                 <p className="mt-1 text-[14px] leading-[1.4] text-sg-muted">
-                  Soldier Field, Chicago, IL
+                  Toyota Center, Houston, TX
                 </p>
               </div>
               <button
@@ -197,7 +197,7 @@ function CheckoutPage() {
             <div className="min-w-0">
               <p className="text-[15px] font-semibold leading-[1.4]">Mobile tickets</p>
               <p className="mt-1 text-[14px] leading-[1.45] text-sg-ink">
-                Tickets will be delivered to your email address by Aug 26.
+                Tickets will be delivered to your email address by Sep 16.
               </p>
             </div>
           </div>
@@ -219,7 +219,7 @@ function CheckoutPage() {
           <div className="mt-2.5 flex items-center justify-between gap-3 rounded-[12px] border border-sg-line px-3.5 py-2.5">
             <div className="min-w-0">
               <p className="truncate text-[14px]">sarahjohnsonxx22@gmail.com</p>
-              <p className="mt-0.5 text-[14px] text-sg-muted">(351) 333-1408</p>
+              <p className="mt-0.5 text-[14px] text-sg-muted">(413) 673-8759</p>
             </div>
             <button className="shrink-0 rounded-full bg-sg-chip px-4 py-2 text-[13px] font-semibold transition-colors active:bg-sg-line">
               Edit
@@ -296,7 +296,11 @@ function CheckoutPage() {
       {/* Sticky footer */}
       <div className="fixed bottom-0 left-1/2 z-40 w-full max-w-[430px] -translate-x-1/2 border-t border-sg-line bg-white px-4 pb-4 pt-3">
         <div className="flex items-center justify-between gap-3">
-          <p className="text-[15px] font-semibold">Total ${money(total)}</p>
+          <p className="flex items-center gap-2 text-[15px] font-semibold">
+            <span>Total</span>
+            <span className="font-normal text-sg-muted line-through">${money(SUBTOTAL)}</span>
+            <span className="text-sg-green">${money(total)}</span>
+          </p>
           <DetailsToggle open={breakdownOpen} onClick={() => setBreakdownOpen((v) => !v)} />
         </div>
 
@@ -319,6 +323,10 @@ function CheckoutPage() {
                 <div className="flex items-center justify-between gap-3">
                   <dt>Fees</dt>
                   <dd>${money(FEES)} x {QUANTITY}</dd>
+                </div>
+                <div className="flex items-center justify-between gap-3">
+                  <dt>Discount</dt>
+                  <dd className="shrink-0 text-sg-green">-${money(BASE_DISCOUNT)}</dd>
                 </div>
                 {applied && (
                   <div className="flex items-center justify-between gap-3 text-sg-green">
