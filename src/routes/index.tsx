@@ -81,7 +81,7 @@ function CheckoutPage() {
   const [paying, setPaying] = useState(false);
 
   const discount = applied ? DISCOUNT : 0;
-  const total = SUBTOTAL - discount;
+  const total = BASE_TOTAL - discount;
 
   const applyCode = () => {
     const value = code.trim();
