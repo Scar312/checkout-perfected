@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import arenaOverviewAsset from "@/assets/arena-overview.png.asset.json";
-import arenaZoomAsset from "@/assets/arena-zoom.png.asset.json";
+import msgStageAsset from "@/assets/msg-stage.jpg.asset.json";
+import msgOverviewAsset from "@/assets/msg-overview.png.asset.json";
+import msgZoomAsset from "@/assets/msg-zoom.png.asset.json";
 import {
   AppleLogo,
   Chevron,
@@ -19,7 +20,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Review your tickets for J. Cole at Toyota Center, Houston and pay securely.",
+          "Review your tickets for Harry Styles with Jamie XX at Madison Square Garden, New York and pay securely.",
       },
       { property: "og:title", content: "Checkout — Review your order" },
       {
@@ -31,14 +32,13 @@ export const Route = createFileRoute("/")({
   component: CheckoutPage,
 });
 
-const TICKET_PRICE = 45.0;
-const FEES = 9.65;
+const TICKET_PRICE = 314.0;
+const FEES = 53.05;
 const QUANTITY = 2;
 const SUBTOTAL = (TICKET_PRICE + FEES) * QUANTITY;
-const BASE_DISCOUNT = 10.54;
-const BASE_TOTAL = SUBTOTAL - BASE_DISCOUNT;
+const BASE_TOTAL = SUBTOTAL;
 const PROMO_CODES = ["dreaming80", "messy80", "seat80tix", "purple80"];
-const DISCOUNT = Math.round(BASE_TOTAL * 0.8 * 100) / 100;
+const DISCOUNT = Math.round(BASE_TOTAL * 0.9 * 100) / 100;
 
 const money = (n: number) =>
   n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -137,8 +137,10 @@ function CheckoutPage() {
           <h2 className="text-[24px] font-bold leading-[1.2] tracking-[-0.02em]">
             Review your order
           </h2>
-          <p className="mt-3.5 text-[16px] font-semibold leading-[1.35]">J. Cole</p>
-          <p className="mt-1 text-[14px] text-sg-muted">Thu, Sep 17 at 8:00pm</p>
+          <p className="mt-3.5 text-[16px] font-semibold leading-[1.35]">
+            Harry Styles with Jamie XX
+          </p>
+          <p className="mt-1 text-[14px] text-sg-muted">Wed, Aug 26 at 8:00pm</p>
           <div className="mt-2.5 flex items-center justify-between gap-3 pb-3.5">
             <DealBadge />
             <DetailsToggle open={detailsOpen} onClick={() => setDetailsOpen((v) => !v)} />
@@ -155,12 +157,16 @@ function CheckoutPage() {
             <div className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 py-4">
               {[
                 {
-                  src: arenaOverviewAsset.url,
-                  alt: "Toyota Center seating map with Section 411 highlighted",
+                  src: msgStageAsset.url,
+                  alt: "View of the stage from Section 225 at Madison Square Garden",
                 },
                 {
-                  src: arenaZoomAsset.url,
-                  alt: "Zoomed map of Section 411, Row 8",
+                  src: msgOverviewAsset.url,
+                  alt: "Madison Square Garden seating map with Section 225 highlighted",
+                },
+                {
+                  src: msgZoomAsset.url,
+                  alt: "Zoomed map of Section 225, Row 14",
                 },
               ].map((image) => (
                 <img
@@ -175,9 +181,9 @@ function CheckoutPage() {
 
             <div className="flex items-center justify-between gap-3 px-4 pb-5">
               <div className="min-w-0">
-                <p className="text-[15px] font-medium leading-[1.4]">Section 411, Row 8</p>
+                <p className="text-[15px] font-medium leading-[1.4]">Section 225, Row 14</p>
                 <p className="mt-1 text-[14px] leading-[1.4] text-sg-muted">
-                  Toyota Center, Houston, TX
+                  Madison Square Garden, New York, NY
                 </p>
               </div>
               <button
@@ -197,7 +203,7 @@ function CheckoutPage() {
             <div className="min-w-0">
               <p className="text-[15px] font-semibold leading-[1.4]">Mobile tickets</p>
               <p className="mt-1 text-[14px] leading-[1.45] text-sg-ink">
-                Tickets will be delivered to your email address by Sep 16.
+                Tickets will be delivered to your email address by Aug 25.
               </p>
             </div>
           </div>
@@ -219,7 +225,7 @@ function CheckoutPage() {
           <div className="mt-2.5 flex items-center justify-between gap-3 rounded-[12px] border border-sg-line px-3.5 py-2.5">
             <div className="min-w-0">
               <p className="truncate text-[14px]">sarahjohnsonxx22@gmail.com</p>
-              <p className="mt-0.5 text-[14px] text-sg-muted">(413) 673-8759</p>
+              <p className="mt-0.5 text-[14px] text-sg-muted">(413) 673-8135</p>
             </div>
             <button className="shrink-0 rounded-full bg-sg-chip px-4 py-2 text-[13px] font-semibold transition-colors active:bg-sg-line">
               Edit
@@ -298,8 +304,16 @@ function CheckoutPage() {
         <div className="flex items-center justify-between gap-3">
           <p className="flex items-center gap-2 text-[15px] font-semibold">
             <span>Total</span>
-            <span className="font-normal text-sg-muted line-through">${money(SUBTOTAL)}</span>
-            <span className="text-sg-green">${money(total)}</span>
+            {applied ? (
+              <>
+                <span className="font-normal text-sg-muted line-through">
+                  ${money(BASE_TOTAL)}
+                </span>
+                <span className="text-sg-green">${money(total)}</span>
+              </>
+            ) : (
+              <span>${money(total)}</span>
+            )}
           </p>
           <DetailsToggle open={breakdownOpen} onClick={() => setBreakdownOpen((v) => !v)} />
         </div>
@@ -323,10 +337,6 @@ function CheckoutPage() {
                 <div className="flex items-center justify-between gap-3">
                   <dt>Fees</dt>
                   <dd>${money(FEES)} x {QUANTITY}</dd>
-                </div>
-                <div className="flex items-center justify-between gap-3">
-                  <dt>Discount</dt>
-                  <dd className="shrink-0 text-sg-green">-${money(BASE_DISCOUNT)}</dd>
                 </div>
                 {applied && (
                   <div className="flex items-center justify-between gap-3 text-sg-green">
